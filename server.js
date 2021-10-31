@@ -7,7 +7,7 @@ const cors = require("cors");
 const path = require("path");
 
 mongoose
-  .connect("mongodb://localhost/sanoft")
+  .connect(process.env.DATABASE_URL || "mongodb://localhost/sanoft")
   .then(() => console.log("Connected to MongoDB..."))
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
@@ -30,3 +30,5 @@ const server = app.listen(port, () =>
 );
 
 module.exports = server;
+
+
