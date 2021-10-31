@@ -4,6 +4,7 @@ const users = require("./routes/users");
 const items = require("./routes/items");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const path = require("path");
 
 mongoose
   .connect("mongodb://localhost/sanoft")
@@ -11,8 +12,13 @@ mongoose
   .catch((err) => console.error("Could not connect to MongoDB..."));
 
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "build")));
 
 app.use(cors());
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 app.use("/api/users", users);
 app.use("/api/items", items);
