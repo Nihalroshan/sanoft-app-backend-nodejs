@@ -16,12 +16,12 @@ app.use(express.static(path.join(__dirname, "build")));
 
 app.use(cors());
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"));
-});
-
 app.use("/api/users", users);
 app.use("/api/items", items);
+
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "build", "index.html"));
+});
 
 const port = process.env.PORT || 3001;
 
@@ -30,5 +30,3 @@ const server = app.listen(port, () =>
 );
 
 module.exports = server;
-
-
