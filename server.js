@@ -12,11 +12,15 @@ mongoose
 
 app.use(express.json());
 
-app.use(cors())
+app.use(cors());
 
 app.use("/api/users", users);
 app.use("/api/items", items);
 
-const server = app.listen(3001, () => console.log("Listening to port 3001.."));
+const port = process.env.PORT || 3001;
+
+const server = app.listen(port, () =>
+  console.log(`Listening to port ${port}..`)
+);
 
 module.exports = server;
